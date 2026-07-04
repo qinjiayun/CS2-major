@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="2026年科隆Major CS2总决赛战报：Falcons 3-0横扫FURIA夺冠，m0NESY荣获MVP，NiKo十二年Major终圆梦">
+<meta name="keywords" content="CS2,Major,科隆Major,Falcons,FURIA,m0NESY,NiKo,karrigan">
+<meta name="theme-color" content="#00b42a">
+<title>科隆Major 2026 - 决赛战报 | Falcons 3-0 FURIA 夺冠</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC','Microsoft YaHei',sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh}
+.hero{text-align:center;padding:30px 20px}
+.hero h1{font-size:clamp(18px,4vw,32px);font-weight:900;color:#ffd700}
+.hero .sub{font-size:.8rem;color:#777;margin-top:4px}
+.container{max-width:1200px;margin:0 auto;padding:12px}
+.alert{background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);border-radius:10px;padding:12px 16px;margin-bottom:12px;font-size:.82rem;line-height:1.6}
+.sec{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px;margin-bottom:12px}
+.sec h2{font-size:1rem;font-weight:700;margin-bottom:12px;color:#ffd700}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:768px){.g2{grid-template-columns:1fr}}
+.card{text-align:center;padding:14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.card .logo{width:48px;height:48px;margin:0 auto;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.05)}
+.card .name{font-size:.85rem;font-weight:900;margin:6px 0}
+.card .pct{font-size:1.6rem;font-weight:900}
+.card .bar{height:5px;border-radius:3px;margin:6px auto 0;max-width:160px;overflow:hidden}
+.card .bar div{height:100%;border-radius:3px}
+.final-card{border:2px solid rgba(255,215,0,.6);background:rgba(255,215,0,.05)}
+.chart-box{position:relative;min-height:300px}
+table{width:100%;border-collapse:collapse;font-size:.7rem}
+th{padding:6px;color:#ffd700;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
+td{padding:5px;border-bottom:1px solid rgba(255,255,255,.03)}
+footer{text-align:center;padding:16px;color:#444;font-size:.6rem}
+.match-box{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.match-team{flex:1;text-align:center;padding:12px;border-radius:8px}
+.match-team.win{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3)}
+.match-team.lose{background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.2)}
+.match-team.vs{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2)}
+.match-team .logo{width:40px;height:40px;margin:0 auto 6px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,.05)}
+.match-team .name{font-weight:900;font-size:.9rem;margin:2px 0}
+.match-team .score{font-size:1.5rem;font-weight:900}
+.match-arrow{font-size:1.2rem;color:#ffd700}
+.final-box{display:flex;align-items:center;justify-content:center;gap:16px;padding:24px;border-radius:16px;background:rgba(255,215,0,.05);border:2px solid rgba(255,215,0,.3);margin:12px 0}
+.final-team{flex:1;text-align:center;padding:16px;border-radius:12px}
+.final-team .logo{width:64px;height:64px;margin:0 auto 8px;border-radius:12px;object-fit:contain;background:rgba(255,255,255,.05)}
+.final-team .name{font-weight:900;font-size:1.1rem;margin:4px 0}
+.final-team .score{font-size:2rem;font-weight:900}
+.final-vs{font-size:2rem;color:#ffd700;font-weight:900}
+.prob-bar{display:flex;height:32px;border-radius:16px;overflow:hidden;margin:12px 0;position:relative}
+.prob-bar div{display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem;color:#000}
+</style>
+</head>
+<body>
+<canvas id="bg" style="position:fixed;top:0;left:0;z-index:0;pointer-events:none"></canvas>
+<div class="hero">
+  <h1>科隆Major 2026 · 冠军诞生</h1>
+  <p class="sub">🏆 Falcons 3-0 横扫 FURIA | 队史首座Major冠军</p>
+</div>
+<div class="container" id="root"></div>
+<footer>HLTV · BetBoom · Cybersport · Dust2 · 5EPlay · Polymarket | 2026.06.22</footer>
+<script>
+(function(){var c=document.getElementById("bg"),x=c.getContext("2d"),p=[],cl=["#ffd700","#f5a623","#4ade80","#ff6b35","#60a5fa"];function R(){c.width=innerWidth;c.height=innerHeight}R();addEventListener("resize",R);for(var i=0;i<30;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,vy:-Math.random()*.6-.2,alpha:Math.random()*.4+.1,color:cl[Math.random()*cl.length|0]});function A(){x.clearRect(0,0,c.width,c.height);for(var i=0;i<p.length;i++){var o=p[i];o.y+=o.vy;if(o.y<-10){o.y=c.height+10;o.x=Math.random()*c.width}x.beginPath();x.arc(o.x,o.y,o.r,0,Math.PI*2);x.globalAlpha=o.alpha;x.fillStyle=o.color;x.fill();x.globalAlpha=1}requestAnimationFrame(A)}A()})();
+
+// ===== DATA =====
+var T={
+  FURIA:{n:"FURIA",id:8297,c:"#ff6b35",s:"FUR"},
+  Z9:{n:"9z",id:9996,c:"#60a5fa",s:"9z"},
+  AURORA:{n:"Aurora",id:11861,c:"#a78bfa",s:"AUR"},
+  BETBOOM:{n:"BetBoom",id:12394,c:"#f472b6",s:"BB"},
+  SPIRIT:{n:"Spirit",id:7020,c:"#22d3ee",s:"SPI"},
+  G2:{n:"G2",id:5995,c:"#ef4444",s:"G2"},
+  VITALITY:{n:"Vitality",id:9565,c:"#fbbf24",s:"VIT"},
+  FALCONS:{n:"Falcons",id:11283,c:"#00b42a",s:"FLC"}
+};
+var KEYS=Object.keys(T);
+
+// SVG Logo Fallbacks
+var FALLBACK_LOGOS={
+  SPIRIT:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%231a1a1a'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E",
+  G2:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23ef4444'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3EG2%3C/text%3E%3C/svg%3E",
+  VITALITY:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23fbbf24'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='22' font-weight='bold' fill='%23000' text-anchor='middle'%3EVIT%3C/text%3E%3C/svg%3E",
+  FALCONS:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%2300b42a'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='24' font-weight='bold' fill='white' text-anchor='middle'%3EFLC%3C/text%3E%3C/svg%3E",
+  FURIA:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23ff6b35'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='24' font-weight='bold' fill='white' text-anchor='middle'%3EFUR%3C/text%3E%3C/svg%3E",
+  AURORA:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23a78bfa'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='22' font-weight='bold' fill='white' text-anchor='middle'%3EAUR%3C/text%3E%3C/svg%3E",
+  BETBOOM:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23f472b6'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='22' font-weight='bold' fill='white' text-anchor='middle'%3EBB%3C/text%3E%3C/svg%3E",
+  Z9:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%2360a5fa'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='22' font-weight='bold' fill='white' text-anchor='middle'%3E9z%3C/text%3E%3C/svg%3E"
+};
+
+function getLogo(k){return FALLBACK_LOGOS[k]||FALLBACK_LOGOS.SPIRIT}
+
+// ==== ACTUAL RESULTS ====
+var qfResults={
+  FURIA:{opp:"Z9",score:"2-1",win:true},
+  Z9:{opp:"FURIA",score:"1-2",win:false},
+  AURORA:{opp:"BETBOOM",score:"2-0",win:true},
+  BETBOOM:{opp:"AURORA",score:"0-2",win:false},
+  SPIRIT:{opp:"G2",score:"2-1",win:true},
+  G2:{opp:"SPIRIT",score:"1-2",win:false},
+  FALCONS:{opp:"VITALITY",score:"2-1",win:true},
+  VITALITY:{opp:"FALCONS",score:"1-2",win:false}
+};
+
+var sfResults={
+  FURIA:{opp:"AURORA",score:"2-0",win:true},
+  AURORA:{opp:"FURIA",score:"0-2",win:false},
+  FALCONS:{opp:"SPIRIT",score:"2-1",win:true},
+  SPIRIT:{opp:"FALCONS",score:"1-2",win:false}
+};
+
+// Elo Ratings (updated after all matches)
+var baseElo={SPIRIT:1700,VITALITY:1680,FALCONS:1640,FURIA:1550,AURORA:1420,G2:1400,BETBOOM:1380,Z9:1330};
+var adjElo={SPIRIT:1680,VITALITY:1660,FALCONS:1720,FURIA:1640,AURORA:1400,G2:1380,BETBOOM:1360,Z9:1310};
+
+// Final Result - Actual
+var finalResult={winner:"FALCONS",loser:"FURIA",score:"3-0",maps:[{name:"Mirage",fal:13,fur:8},{name:"Anubis",fal:13,fur:8},{name:"Inferno",fal:13,fur:8}]};
+var finalProbFal=1.0;
+var finalProb=0.0;
+
+// Final paths
+var AP=[
+  {ch:"FALCONS",pr:finalProbFal},
+  {ch:"FURIA",pr:finalProb}
+].sort(function(x,y){return y.pr-x.pr});
+
+var CS=[
+  {k:"FALCONS",p:finalProbFal},
+  {k:"FURIA",p:finalProb}
+];
+
+console.log("Final: Falcons "+(finalProbFal*100).toFixed(1)+"% vs FURIA "+(finalProb*100).toFixed(1)+"%");
+</script>
+
+<script>
+var chartReady=false;
+function loadChart(cb){
+  if(typeof Chart!=="undefined"){cb();return}
+  var urls=[
+    "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js",
+    "https://unpkg.com/chart.js@4.4.1/dist/chart.umd.min.js"
+  ];
+  function tryUrl(i){
+    if(i>=urls.length){document.getElementById("root").innerHTML+='<div class="sec" style="color:#ff6b35">图表加载失败，不影响其他内容</div>';return}
+    var s=document.createElement("script");s.src=urls[i];
+    s.crossOrigin="anonymous";
+    s.onload=function(){cb()};
+    s.onerror=function(){tryUrl(i+1)};
+    document.head.appendChild(s);
+  }
+  tryUrl(0);
+}
+</script>
+
+<script>
+loadChart(function(){
+chartReady=true;
+var root=document.getElementById("root");
+
+// Alert
+root.innerHTML='<div class="alert"><b style="color:#ffd700">🏆 新王登基：Falcons 3-0 FURIA 夺冠</b><br><b style="color:#4ade80">✅ 决赛已结束 | Falcons队史首夺Major</b><br><b style="color:#ff6b35">黑豹FURIA连克9z、Aurora晋级决赛</b><br><b style="color:#00b42a">猎鹰Falcons连克Vitality、Spirit(绿龙)晋级决赛</b></div>';
+
+// === FINAL RESULT ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  var fur=T.FURIA,fal=T.FALCONS;
+  
+  s.innerHTML='<h2>🏆 Grand Final - 冠军争夺战</h2>'+
+  '<div class="final-box">'+
+  '<div class="final-team lose" style="border:2px solid '+fur.c+'44;background:'+fur.c+'11">'+
+  '<img class="logo" src="'+getLogo("FURIA")+'" alt="'+fur.n+'">'+
+  '<div class="name" style="color:'+fur.c+'">'+fur.n+'</div>'+
+  '<div class="score" style="color:#ff4444">0</div>'+
+  '<div style="font-size:.65rem;color:#888">亚军</div>'+
+  '</div>'+
+  '<div class="final-vs" style="color:#ffd700">3-0</div>'+
+  '<div class="final-team win" style="border:2px solid '+fal.c+'44;background:'+fal.c+'11">'+
+  '<img class="logo" src="'+getLogo("FALCONS")+'" alt="'+fal.n+'">'+
+  '<div class="name" style="color:'+fal.c+'">'+fal.n+'</div>'+
+  '<div class="score" style="color:#4ade80">3</div>'+
+  '<div style="font-size:.65rem;color:#ffd700">🏆 冠军</div>'+
+  '</div>'+
+  '</div>'+
+  '<div style="margin-top:12px;font-size:.75rem;color:#aaa;text-align:center">'+
+  '<b style="color:#ffd700">🏆 Falcons队史首夺Major冠军！</b><br>'+
+  'm0NESY荣获HLTV/DHL双料MVP | NiKo十二年Major终圆梦 | karrigan 36岁成最年长冠军'+
+  '</div>'+
+  '<div style="margin-top:8px;font-size:.7rem;color:#888;text-align:center">'+
+  '图一: Mirage 13-8 | 图二: Anubis 13-8 | 图三: Inferno 13-8'+
+  '</div>';
+  root.appendChild(s);
+})();
+
+// === QF RESULTS ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  s.innerHTML='<h2>🎯 QF战报</h2><div class="g2">';
+  
+  var qfMatches=[
+    {t1:"FURIA",t2:"Z9",r1:"2",r2:"1",map1:"Dust2",map2:"Mirage",map3:"Overpass"},
+    {t1:"AURORA",t2:"BETBOOM",r1:"2",r2:"0",map1:"Nuke",map2:"Anubis",map3:"-"},
+    {t1:"SPIRIT",t2:"G2",r1:"2",r2:"1",map1:"Inferno",map2:"Nuke",map3:"Mirage"},
+    {t1:"FALCONS",t2:"VITALITY",r1:"2",r2:"1",map1:"Dust2",map2:"Anubis",map3:"Overpass"}
+  ];
+  
+  qfMatches.forEach(function(m){
+    var t1=T[m.t1],t2=T[m.t2];
+    s.innerHTML+='<div class="match-box"><div class="match-team win"><img class="logo" src="'+getLogo(m.t1)+'" alt="'+t1.n+'"><div class="name" style="color:'+t1.c+'">'+t1.n+'</div><div class="score" style="color:#4ade80">'+m.r1+'</div></div><div class="match-arrow">→</div><div class="match-team lose"><img class="logo" src="'+getLogo(m.t2)+'" alt="'+t2.n+'"><div class="name" style="color:'+t2.c+'">'+t2.n+'</div><div class="score" style="color:#ff4444">'+m.r2+'</div></div></div>';
+  });
+  
+  s.innerHTML+='</div>';
+  root.appendChild(s);
+})();
+
+// === SF RESULTS ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  s.innerHTML='<h2>⚔️ SF战报 - 半决赛</h2><div class="g2">';
+  
+  var sfMatches=[
+    {t1:"FURIA",t2:"AURORA",r1:"2",r2:"0",map1:"Dust2",map2:"Inferno",map3:"-",note:"黑豹完胜Aurora晋级决赛"},
+    {t1:"FALCONS",t2:"SPIRIT",r1:"2",r2:"1",map1:"Ancient",map2:"Mirage",map3:"Nuke",note:"猎鹰击败绿龙Spirit晋级决赛"}
+  ];
+  
+  sfMatches.forEach(function(m){
+    var t1=T[m.t1],t2=T[m.t2];
+    s.innerHTML+='<div class="match-box" style="flex-direction:column"><div style="display:flex;align-items:center;gap:8px;width:100%"><div class="match-team win" style="flex:1"><img class="logo" src="'+getLogo(m.t1)+'" alt="'+t1.n+'"><div class="name" style="color:'+t1.c+'">'+t1.n+'</div><div class="score" style="color:#4ade80">'+m.r1+'</div></div><div class="match-arrow">→</div><div class="match-team lose" style="flex:1"><img class="logo" src="'+getLogo(m.t2)+'" alt="'+t2.n+'"><div class="name" style="color:'+t2.c+'">'+t2.n+'</div><div class="score" style="color:#ff4444">'+m.r2+'</div></div></div><div style="font-size:.65rem;color:#888;margin-top:6px">'+m.note+'</div></div>';
+  });
+  
+  s.innerHTML+='</div>';
+  root.appendChild(s);
+})();
+
+// === FINAL DEEP ANALYSIS ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  
+  s.innerHTML='<h2>🐆🦅 FURIA vs Falcons 决赛深度分析</h2>'+
+  '<table>'+
+  '<tr><th>维度</th><th style="color:#ff6b35">FURIA</th><th style="color:#00b42a">Falcons</th><th>结果</th></tr>'+
+  '<tr><td>最终比分</td><td><b style="color:#ff4444">0</b></td><td><b style="color:#4ade80">3</b></td><td>Falcons完胜</td></tr>'+
+  '<tr><td>Elo评级</td><td><b style="color:#ff6b35">'+adjElo.FURIA+'</b></td><td><b style="color:#00b42a">'+adjElo.FALCONS+'</b></td><td>Falcons+80</td></tr>'+
+  '<tr><td>晋级之路</td><td>2-1 9z → 2-0 Aurora</td><td>2-1 Vitality → 2-1 Spirit</td><td>FURIA更轻松</td></tr>'+
+  '<tr><td>明星选手</td><td>molodoy 1.43 rating(全场最高)</td><td>m0NESY 1.25 rating MVP</td><td>FURIA选手表现更好</td></tr>'+
+  '<tr><td>大赛经验</td><td>首次Major决赛</td><td>karrigan+NiKo经验丰富</td><td>Falcons+</td></tr>'+
+  '<tr><td>地图BP</td><td>BAN Ancient PICK Mirage/Inferno</td><td>BAN Overpass PICK Anubis/Dust2</td><td>Falcons拿下全部选图</td></tr>'+
+  '<tr><td>关键因素</td><td>个人能力强但团队配合稍逊</td><td>顶级防守+NiKo关键击杀</td><td>Falcons团队碾压</td></tr>'+
+  '</table>'+
+  '<div style="margin-top:12px;font-size:.75rem;color:#aaa;line-height:1.8">'+
+  '<b style="color:#ffd700">🏆 Falcons 3-0 横扫夺冠！</b><br>'+
+  '三图比分均为13-8，Falcons全程牢牢掌控比赛节奏。NiKo打出52-32数据、1.43 rating，在关键回合屡屡挺身而出。<br>'+
+  'm0NESY凭借1.25平均rating荣膺HLTV/DHL双料MVP。karrigan以36岁2个月成为Major历史最年长冠军选手。<br>'+
+  'FURIA虽有molodoy全场最高1.43 rating，但整体团队配合和防守稳定性与Falcons差距明显。<br>'+
+  '历史时刻: NiKo十二年Major终圆梦，三次闯入决赛后终于捧杯！'+
+  '</div>';
+  root.appendChild(s);
+})();
+
+// === CHAMPION CARDS ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  var tcFal=T.FALCONS,tcFur=T.FURIA;
+  
+  var cards='<div class="card final-card" style="border-left:3px solid '+tcFal.c+'"><div style="font-size:.65rem;color:#ffd700">🏆 冠军</div><img class="logo" src="'+getLogo("FALCONS")+'" alt="'+tcFal.n+'"><div class="name" style="color:'+tcFal.c+'">'+tcFal.n+'</div><div class="pct" style="color:#4ade80">100%</div><div class="bar"><div style="width:100%;background:'+tcFal.c+'"></div></div><div style="font-size:.62rem;color:#666;margin-top:2px">🦅 队史首冠 | MVP: m0NESY</div></div>';
+  cards+='<div class="card" style="border-left:3px solid '+tcFur.c+'"><div style="font-size:.65rem;color:#888">🥈 亚军</div><img class="logo" src="'+getLogo("FURIA")+'" alt="'+tcFur.n+'"><div class="name" style="color:'+tcFur.c+'">'+tcFur.n+'</div><div class="pct" style="color:#ff6b35">0%</div><div class="bar"><div style="width:0;background:'+tcFur.c+'"></div></div><div style="font-size:.62rem;color:#666;margin-top:2px">🐆 首次Major决赛</div></div>';
+  
+  s.innerHTML='<h2>🏆 冠军荣耀</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px">'+cards+'</div><div class="g2" style="margin-top:12px"><div class="chart-box"><canvas id="finalPie"></canvas></div><div class="chart-box"><canvas id="finalBar"></canvas></div></div>';
+  root.appendChild(s);
+  
+  setTimeout(function(){
+    var c1=document.getElementById("finalPie");
+    if(c1)new Chart(c1,{type:"doughnut",data:{labels:[tcFal.n,tcFur.n],datasets:[{data:[100,0],backgroundColor:[tcFal.c,tcFur.c],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:"50%",plugins:{legend:{position:"bottom",labels:{color:"#ccc",font:{size:12},padding:8}},title:{display:true,text:"决赛结果",color:"#ffd700",font:{size:12}}}}});
+    var c2=document.getElementById("finalBar");
+    if(c2)new Chart(c2,{type:"bar",data:{labels:[tcFal.s,tcFur.s],datasets:[{label:"总决赛得分",data:[3,0],backgroundColor:[tcFal.c+"99",tcFur.c+"99"],borderColor:[tcFal.c,tcFur.c],borderWidth:2,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:"Falcons 3-0 FURIA",color:"#ffd700",font:{size:11}}},scales:{y:{max:5,ticks:{color:"#888"}},x:{ticks:{color:"#aaa",font:{size:10}}}}}});
+  },300);
+})();
+
+// === TOURNAMENT BRACKET ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  s.innerHTML='<h2>📋 淘汰赛对阵图</h2>'+
+  '<div style="font-size:.72rem;color:#aaa;line-height:2">'+
+  '<div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center">'+
+  '<div><b style="color:#ffd700">QF</b><br>'+
+  '<span style="color:#ff6b35">FURIA 2-1</span> 9z<br>'+
+  '<span style="color:#a78bfa">Aurora 2-0</span> BetBoom<br>'+
+  '<span style="color:#22d3ee">Spirit 2-1</span> G2<br>'+
+  '<span style="color:#00b42a">Falcons 2-1</span> Vitality'+
+  '</div>'+
+  '<div style="color:#ffd700;font-size:1.5rem">→</div>'+
+  '<div><b style="color:#ffd700">SF</b><br>'+
+  '<span style="color:#ff6b35">FURIA 2-0</span> Aurora<br>'+
+  '<span style="color:#00b42a">Falcons 2-1</span> Spirit(绿龙)'+
+  '</div>'+
+  '<div style="color:#ffd700;font-size:1.5rem">→</div>'+
+  '<div><b style="color:#ffd700">Final</b><br>'+
+  '<span style="color:#00b42a">🏆 Falcons 3-0</span> <span style="color:#ff6b35">FURIA</span>'+
+  '</div>'+
+  '</div>'+
+  '</div>';
+  root.appendChild(s);
+})();
+
+// === ELIMINATED TEAMS ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  var eliminated=["Z9","BETBOOM","G2","VITALITY","SPIRIT","AURORA"];
+  var html='<h2>❌ 淘汰队伍</h2><div style="display:flex;flex-wrap:wrap;gap:8px">';
+  eliminated.forEach(function(k){
+    var t=T[k];
+    var stage=k==="SPIRIT"||k==="AURORA"?"SF":(k==="G2"||k==="VITALITY"?"QF":"QF");
+    html+='<div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)"><img src="'+getLogo(k)+'" style="width:24px;height:24px;border-radius:4px;object-fit:contain"><span style="font-size:.7rem;color:'+t.c+'">'+t.n+'</span><span style="font-size:.6rem;color:#666">'+stage+'</span></div>';
+  });
+  html+='</div>';
+  s.innerHTML=html;
+  root.appendChild(s);
+})();
+
+// === METHOD ===
+(function(){
+  var s=document.createElement("div");s.className="sec";
+  s.innerHTML='<h2>📋 赛事数据</h2><div style="font-size:.72rem;color:#888;line-height:1.8">'+
+  '<span style="color:#ffd700">QF</span>: FURIA 2-1 9z | Aurora 2-0 BB | Spirit 2-1 G2 | Falcons 2-1 Vitality<br>'+
+  '<span style="color:#ffd700">SF</span>: FURIA 2-0 Aurora | Falcons 2-1 Spirit(绿龙)<br>'+
+  '<span style="color:#ffd700">Final</span>: Falcons 3-0 FURIA (Mirage 13-8 | Anubis 13-8 | Inferno 13-8)<br>'+
+  '<span style="color:#ff6b35">FURIA Elo+90</span>: QF胜利+20 | SF完胜Aurora+30 | 决赛亚军+40<br>'+
+  '<span style="color:#00b42a">Falcons Elo+80</span>: QF胜利+20 | SF击败Spirit+30 | 决赛冠军+30<br>'+
+  '<span style="color:#ffd700">🏆 MVP</span>: m0NESY (1.25 avg rating) | NiKo (1.43 rating 决赛)<br>'+
+  '<span style="color:#ffd700">💰 奖金</span>: 50万美元冠军奖金 + ESL大满贯冠军积分'+
+  '</div>';
+  root.appendChild(s);
+})();
+
+// Trigger
+setTimeout(function(){document.querySelectorAll(".bar div[data-w]").forEach(function(b){b.style.width=b.dataset.w})},600);
+});
+</script>
+</body>
+</html>
